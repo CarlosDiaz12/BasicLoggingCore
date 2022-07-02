@@ -29,8 +29,17 @@ namespace BasicLoggingCore
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            var startupLogger = loggerFactory.CreateLogger<Startup>();
+
+            startupLogger.LogTrace("Trace Level");
+            startupLogger.LogDebug("Debug Level");
+            startupLogger.LogInformation("Information Level");
+            startupLogger.LogWarning("Warning Level");
+            startupLogger.LogError("Error Level");
+            startupLogger.LogCritical("Critical Level");
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
